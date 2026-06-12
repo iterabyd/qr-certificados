@@ -1,61 +1,54 @@
-<!-- Menú lateral principal -->
+<aside id="sidebar" class="sidebar fixed md:relative z-40 h-screen w-64 text-white transition-all duration-300 shadow-xl">
 
-<aside id="sidebar" class="sidebar w-64 text-white">
 
-    <div class="p-6 border-b border-[#5C4033]">
+<!-- Logo -->
+<div class="flex items-center justify-center h-16 border-b border-white/10">
 
-        <h1
-            class="text-xl font-bold text-[#E6C76A]"
-        >
+    <div class="flex items-center gap-3">
+
+        <i class="fa-solid fa-shield-halved text-2xl text-yellow-400"></i>
+
+        <span class="text-lg font-semibold">
             Sistema QR
-        </h1>
+        </span>
 
     </div>
 
-    <nav class="mt-4">
+</div>
 
-        <a
-            href="/qr-certificados/views/dashboard/index.php"
-            class="block px-6 py-3 hover:bg-[#5C4033]"
-        >
-            Dashboard
-        </a>
+<!-- Menú -->
+<nav class="mt-4 px-3">
 
-        <a
-            href="/qr-certificados/views/usuarios/index.php"
-            class="block px-6 py-3 hover:bg-[#5C4033]"
-        >
-            Usuarios
-        </a>
+    <a href="/qr-certificados/views/dashboard/index.php" class="menu-item">
+        <i class="fa-solid fa-chart-line w-5"></i>
+        <span>Dashboard</span>
+    </a>
 
-        <a
-            href="/qr-certificados/views/roles/index.php"
-            class="block px-6 py-3 hover:bg-[#5C4033]"
-        >
-            Roles
-        </a>
+    <a href="/qr-certificados/views/roles/index.php" class="menu-item">
+        <i class="fa-solid fa-user-shield w-5"></i>
+        <span>Roles</span>
+    </a>
 
-        <a
-            href="/qr-certificados/views/personas/index.php"
-            class="block px-6 py-3 hover:bg-[#5C4033]"
-        >
-            Personas
-        </a>
+    <a href="/qr-certificados/views/usuarios/index.php" class="menu-item">
+        <i class="fa-solid fa-users w-5"></i>
+        <span>Usuarios</span>
+    </a>
 
-        <a
-            href="/qr-certificados/views/certificaciones/index.php"
-            class="block px-6 py-3 hover:bg-[#5C4033]"
-        >
-            Certificaciones
-        </a>
+    <a href="/qr-certificados/views/personas/index.php" class="menu-item">
+        <i class="fa-solid fa-id-card w-5"></i>
+        <span>Personas</span>
+    </a>
 
-        <a
-            href="/qr-certificados/actions/logout.php"
-            class="block px-6 py-3 hover:bg-red-700"
-        >
-            Cerrar sesión
-        </a>
+    <a href="/qr-certificados/views/certificaciones/index.php" class="menu-item">
+        <i class="fa-solid fa-certificate w-5"></i>
+        <span>Certificaciones</span>
+    </a>
 
-    </nav>
+    <a href="/qr-certificados/actions/logout.php" class="menu-item text-red-300 hover:text-red-100">
+        <i class="fa-solid fa-right-from-bracket w-5"></i>
+        <span>Cerrar sesión</span>
+    </a>
+
+</nav>
 
 </aside>

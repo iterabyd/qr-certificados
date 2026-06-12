@@ -24,20 +24,25 @@ function abrirModalEditar(id, nombre, descripcion) {
     abrirModal('modalEditarRol');
 }
 
-// Mostrar/Ocultar menú lateral
+// Mostrar/Ocultar sidebar
 document.addEventListener('DOMContentLoaded', function () {
 
-    const btnToggle = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
 
-    if (btnToggle && sidebar) {
+const btnToggle = document.getElementById('toggleSidebar');
+const sidebar = document.getElementById('sidebar');
 
-        btnToggle.addEventListener('click', function () {
+if (btnToggle && sidebar) {
 
-            sidebar.classList.toggle('hidden');
+    btnToggle.addEventListener('click', function () {
 
-        });
+        sidebar.classList.toggle('sidebar-hidden');
 
-    }
+    });
+
+}
 
 });
+
+
+
+

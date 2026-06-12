@@ -5,22 +5,17 @@ require_once '../../layouts/sidebar.php';
 
 require_once '../../controllers/RolController.php';
 
-$controller = new RolController();
 
+$tituloPagina = 'Roles';
+
+$controller = new RolController();
 $roles = $controller->listar();
 
 ?>
 
 <div class="flex-1">
 
-    <header class="bg-white shadow p-4">
-
-        <h2 class="text-2xl font-semibold text-title">
-            Roles
-        </h2>
-
-    </header>
-
+     <?php require_once '../../layouts/navbar.php'; ?>
     <main class="p-6">
 
         <div class="mb-4">

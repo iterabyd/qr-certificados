@@ -67,3 +67,46 @@ body {
     background: #FEE2E2;
     color: #991B1B;
 }
+
+/* Menú lateral */
+.menu-item {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 12px 14px;
+border-radius: 10px;
+margin-bottom: 6px;
+transition: all .25s ease;
+}
+
+.menu-item:hover {
+background: rgba(255,255,255,.08);
+transform: translateX(4px);
+}
+
+.menu-item.active {
+background: var(--color-dorado);
+color: white;
+}
+
+.sidebar-hidden {
+margin-left: -256px;
+}
+
+
+@media (max-width: 768px) {
+
+
+#sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+    margin-left: 0;
+}
+
+}
