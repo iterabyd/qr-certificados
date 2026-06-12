@@ -1,0 +1,210 @@
+<?php
+
+require_once '../../layouts/header.php';
+require_once '../../layouts/sidebar.php';
+
+require_once '../../controllers/RolController.php';
+
+$controller = new RolController();
+
+$roles = $controller->listar();
+
+?>
+
+<div class="flex-1">
+
+    <header class="bg-white shadow p-4">
+
+        <h2 class="text-2xl font-semibold text-title">
+            Roles
+        </h2>
+
+    </header>
+
+    <main class="p-6">
+
+        <div class="mb-4">
+
+        <button id="btnNuevoRol" class="inline-flex items-center gap-2 bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">
+            <i class="fa-solid fa-plus"></i>
+            <span>Nuevo Rol</span>
+        </button>
+
+        </div>
+
+        <div class="card">
+
+            <table class="w-full">
+
+                <thead>
+
+                    <tr
+                        class="bg-[#3E2723] text-white"
+                    >
+                        <th class="p-3">
+                            ID
+                        </th>
+
+                        <th class="p-3">
+                            Nombre
+                        </th>
+
+                        <th class="p-3">
+                            Descripción
+                        </th>
+
+                        <th class="p-3">
+                            Estado
+                        </th>
+                        <th class="p-3">
+                            Acciones
+                        </th>
+                        
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                <?php foreach($roles as $rol): ?>
+
+                    <tr
+                        class="border-b"
+                    >
+
+                        <td class="p-3">
+                            <?= $rol['id']; ?>
+                        </td>
+
+                        <td class="p-3">
+                            <?= $rol['nombre']; ?>
+                        </td>
+
+                        <td class="p-3">
+                            <?= $rol['descripcion']; ?>
+                        </td>
+
+                        <td class="p-3">
+
+                        <?php if($rol['estado'] == 1): ?>
+
+                            <span class="badge-active px-2 py-1 rounded">
+                                Activo
+                            </span>
+
+                        <?php else: ?>
+
+                            <span class="badge-inactive px-2 py-1 rounded">
+                                Inactivo
+                            </span>
+
+                        <?php endif; ?>
+
+                        </td>
+
+                        <td class="p-3">
+
+                            <button onclick="abrirModal('modalCrearRol')" class="btn-primary px-4 py-2 rounded-lg inline-flex items-center gap-2"
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Nuevo Rol</span>
+                            </button>
+
+                            |
+
+                            <?php if($rol['estado'] == 1): ?>
+
+                                <a
+                                    href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0"
+                                    class="text-red-600"
+                                >
+                                    Inactivar
+                                </a>
+
+                            <?php else: ?>
+
+                                <a
+                                    href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=1"
+                                    class="text-green-600"
+                                >
+                                    Activar
+                                </a>
+
+                            <?php endif; ?>
+
+                        </td>
+
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- modales -->
+
+<!-- Modal Crear -->
+<div id="modalCrearRol" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+        <div class="flex justify-between items-center mb-5">
+            <h3 class="text-xl font-semibold text-[#3E2723]">Nuevo Rol</h3>
+            <button type="button" onclick="cerrarModalCrear('modalCrearRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+
+        <form method="POST" action="../../actions/rol_store.php">
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Nombre</label>
+                <input type="text" name="nombre" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]">
+            </div>
+
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Descripción</label>
+                <textarea name="descripcion" rows="4" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="cerrarModalCrear('modalCrearRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
+                <button type="submit" class="bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div id="modalEditarRol" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+        <div class="flex justify-between items-center mb-5">
+            <h3 class="text-xl font-semibold text-[#3E2723]">Editar Rol</h3>
+            <button type="button" onclick="cerrarModalEditar('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+
+        <form method="POST" action="../../actions/rol_update.php">
+            <input type="hidden" id="edit_id" name="id">
+
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Nombre</label>
+                <input type="text" id="edit_nombre" name="nombre" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]">
+            </div>
+
+            <div class="mb-4">
+                <label class="block mb-2 font-medium">Descripción</label>
+                <textarea id="edit_descripcion" name="descripcion" rows="4" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="cerrarModalEditar('modalEditarRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
+                <button type="submit" class="bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<?php require_once '../../layouts/footer.php'; ?>
