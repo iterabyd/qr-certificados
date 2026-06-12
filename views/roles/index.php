@@ -25,22 +25,20 @@ $roles = $controller->listar();
 
         <div class="mb-4">
 
-        <button id="btnNuevoRol" class="inline-flex items-center gap-2 bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">
+        <button onclick="abrirModal('modalCrearRol')" class="btn-primary px-4 py-2 rounded-lg inline-flex items-center gap-2">
             <i class="fa-solid fa-plus"></i>
             <span>Nuevo Rol</span>
         </button>
 
         </div>
 
-        <div class="card">
+        <div class="card overflow-x-auto">
 
-            <table class="w-full">
+            <table class="w-full text-sm">
 
                 <thead>
 
-                    <tr
-                        class="bg-[#3E2723] text-white"
-                    >
+                    <tr class="bg-[var(--color-marron-oscuro)] text-white">
                         <th class="p-3">
                             ID
                         </th>
@@ -103,36 +101,24 @@ $roles = $controller->listar();
                         </td>
 
                         <td class="p-3">
+                            <div class="flex items-center gap-3">
 
-                            <button onclick="abrirModal('modalCrearRol')" class="btn-primary px-4 py-2 rounded-lg inline-flex items-center gap-2"
-                                <i class="fa-solid fa-plus"></i>
-                                <span>Nuevo Rol</span>
-                            </button>
+                                <button onclick="abrirModalEditar(<?= $rol['id']; ?>,'<?= htmlspecialchars($rol['nombre'], ENT_QUOTES); ?>','<?= htmlspecialchars($rol['descripcion'], ENT_QUOTES); ?>')" class="text-blue-600 hover:text-blue-800">
+                                    Editar
+                                </button>
 
-                            |
+                                <?php if($rol['estado'] == 1): ?>
+                                    <a href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0" class="text-red-600 hover:text-red-800">
+                                        Inactivar
+                                    </a>
+                                <?php else: ?>
+                                    <a href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=1" class="text-green-600 hover:text-green-800">
+                                        Activar
+                                    </a>
+                                <?php endif; ?>
 
-                            <?php if($rol['estado'] == 1): ?>
-
-                                <a
-                                    href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0"
-                                    class="text-red-600"
-                                >
-                                    Inactivar
-                                </a>
-
-                            <?php else: ?>
-
-                                <a
-                                    href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=1"
-                                    class="text-green-600"
-                                >
-                                    Activar
-                                </a>
-
-                            <?php endif; ?>
-
+                            </div>
                         </td>
-
 
                     </tr>
 
@@ -155,7 +141,7 @@ $roles = $controller->listar();
     <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
         <div class="flex justify-between items-center mb-5">
             <h3 class="text-xl font-semibold text-[#3E2723]">Nuevo Rol</h3>
-            <button type="button" onclick="cerrarModalCrear('modalCrearRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <button type="button" onclick="cerrarModal('modalCrearRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
         <form method="POST" action="../../actions/rol_store.php">
@@ -170,7 +156,7 @@ $roles = $controller->listar();
             </div>
 
             <div class="flex justify-end gap-2">
-                <button type="button" onclick="cerrarModalCrear('modalCrearRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
+                <button type="button" onclick="cerrarModal('modalCrearRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
                 <button type="submit" class="bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">Guardar</button>
             </div>
         </form>
@@ -182,7 +168,7 @@ $roles = $controller->listar();
     <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
         <div class="flex justify-between items-center mb-5">
             <h3 class="text-xl font-semibold text-[#3E2723]">Editar Rol</h3>
-            <button type="button" onclick="cerrarModalEditar('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <button type="button" onclick="cerrarModal('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
         <form method="POST" action="../../actions/rol_update.php">
@@ -199,7 +185,7 @@ $roles = $controller->listar();
             </div>
 
             <div class="flex justify-end gap-2">
-                <button type="button" onclick="cerrarModalEditar('modalEditarRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
+                <button type="button" onclick="cerrarModal('modalEditarRol')" class="px-4 py-2 border rounded-lg">Cancelar</button>
                 <button type="submit" class="bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">Actualizar</button>
             </div>
         </form>
