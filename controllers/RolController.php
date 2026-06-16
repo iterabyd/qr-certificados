@@ -30,7 +30,7 @@ class RolController
         );
 
         header(
-            'Location: index.php'
+            'Location: ../views/roles/index.php'
         );
     }
 
@@ -52,7 +52,7 @@ class RolController
         );
 
         header(
-            'Location: index.php'
+            'Location: ../views/roles/index.php'
         );
     }
 
@@ -64,7 +64,7 @@ class RolController
         $this->rolModel->eliminar($id);
 
         header(
-            'Location: index.php'
+            'Location: ../views/roles/index.php'
         );
     }
 }

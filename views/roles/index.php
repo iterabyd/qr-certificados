@@ -103,7 +103,7 @@ $roles = $controller->listar();
                                 </button>
 
                                 <?php if($rol['estado'] == 1): ?>
-                                    <a href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0" class="text-red-600 hover:text-red-800">
+                                    <a href="/qr-certificados/actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0" class="text-red-600 hover:text-red-800">
                                         Inactivar
                                     </a>
                                 <?php else: ?>
@@ -139,7 +139,7 @@ $roles = $controller->listar();
             <button type="button" onclick="cerrarModal('modalCrearRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="../../actions/rol_store.php">
+        <form method="POST" action="<?= BASE_URL ?>/actions/rol_store.php">
             <div class="mb-4">
                 <label class="block mb-2 font-medium">Nombre</label>
                 <input type="text" name="nombre" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]">
@@ -166,7 +166,7 @@ $roles = $controller->listar();
             <button type="button" onclick="cerrarModal('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="../actions/rol_update.php">
+        <form method="POST" action="<?= BASE_URL ?>/actions/rol_update.php">
             <input type="hidden" id="edit_id" name="id">
 
             <div class="mb-4">
