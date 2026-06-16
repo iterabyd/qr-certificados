@@ -216,3 +216,31 @@ body {
     }
 
 }
+/*  ============ gridjs custom styles ============ */
+.gridjs-wrapper {
+    border: none !important;
+}
+
+.gridjs-table {
+    width: 100% !important;
+}
+
+.gridjs-search-input {
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+}
+
+.gridjs-pagination button {
+    border-radius: 6px !important;
+}
+
+.gridjs-th {
+    background: var(--color-marron-oscuro) !important;
+    color: white !important;
+}
+
+button.gridjs-sort-neutral,
+button.gridjs-sort-asc,
+button.gridjs-sort-desc {
+    filter: brightness(0) saturate(100%) invert(72%) sepia(29%) saturate(1096%) hue-rotate(10deg) brightness(92%) contrast(87%);
+}

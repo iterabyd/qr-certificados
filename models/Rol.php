@@ -113,7 +113,7 @@ class Rol
     {
         $sql = "
             UPDATE roles
-            SET activo = ?
+            SET estado = ?
             WHERE id = ?
         ";
 

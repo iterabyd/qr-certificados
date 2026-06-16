@@ -3,8 +3,8 @@
 // Cargar controlador
 require_once '../controllers/RolController.php';
 
-// Crear instancia del controlador
+// Instanciar controlador
 $controller = new RolController();
 
-// Registrar rol
+// Crear rol
 $controller->crear();

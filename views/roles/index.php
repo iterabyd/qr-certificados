@@ -1,14 +1,19 @@
 <?php
 
+require_once '../../config/config.php';
+
 require_once '../../layouts/header.php';
 require_once '../../layouts/sidebar.php';
 
 require_once '../../controllers/RolController.php';
 
-
+// Título de la página
 $tituloPagina = 'Roles';
 
+// Instanciar controlador
 $controller = new RolController();
+
+// Obtener roles
 $roles = $controller->listar();
 
 ?>
@@ -27,101 +32,8 @@ $roles = $controller->listar();
 
         </div>
 
-        <div class="card overflow-x-auto">
-
-            <table class="w-full text-sm">
-
-                <thead>
-
-                    <tr class="bg-[var(--color-marron-oscuro)] text-white">
-                        <th class="p-3">
-                            ID
-                        </th>
-
-                        <th class="p-3">
-                            Nombre
-                        </th>
-
-                        <th class="p-3">
-                            Descripción
-                        </th>
-
-                        <th class="p-3">
-                            Estado
-                        </th>
-                        <th class="p-3">
-                            Acciones
-                        </th>
-                        
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                <?php foreach($roles as $rol): ?>
-
-                    <tr
-                        class="border-b"
-                    >
-
-                        <td class="p-3">
-                            <?= $rol['id']; ?>
-                        </td>
-
-                        <td class="p-3">
-                            <?= $rol['nombre']; ?>
-                        </td>
-
-                        <td class="p-3">
-                            <?= $rol['descripcion']; ?>
-                        </td>
-
-                        <td class="p-3">
-
-                        <?php if($rol['estado'] == 1): ?>
-
-                            <span class="badge-active px-2 py-1 rounded">
-                                Activo
-                            </span>
-
-                        <?php else: ?>
-
-                            <span class="badge-inactive px-2 py-1 rounded">
-                                Inactivo
-                            </span>
-
-                        <?php endif; ?>
-
-                        </td>
-
-                        <td class="p-3">
-                            <div class="flex items-center gap-3">
-
-                                <button onclick="abrirModalEditar(<?= $rol['id']; ?>,'<?= htmlspecialchars($rol['nombre'], ENT_QUOTES); ?>','<?= htmlspecialchars($rol['descripcion'], ENT_QUOTES); ?>')" class="text-blue-600 hover:text-blue-800">
-                                    Editar
-                                </button>
-
-                                <?php if($rol['estado'] == 1): ?>
-                                    <a href="/qr-certificados/actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=0" class="text-red-600 hover:text-red-800">
-                                        Inactivar
-                                    </a>
-                                <?php else: ?>
-                                    <a href="../../actions/rol_estado.php?id=<?= $rol['id']; ?>&estado=1" class="text-green-600 hover:text-green-800">
-                                        Activar
-                                    </a>
-                                <?php endif; ?>
-
-                            </div>
-                        </td>
-
-                    </tr>
-
-                <?php endforeach; ?>
-
-                </tbody>
-
-            </table>
+        <div class="card p-4">
+            <div id="tablaRoles"></div>
 
         </div>
 
@@ -186,6 +98,12 @@ $roles = $controller->listar();
         </form>
     </div>
 </div>
+
+<script>
+
+const roles = <?= json_encode($roles); ?>;
+
+</script>
 
 
 <?php require_once '../../layouts/footer.php'; ?>

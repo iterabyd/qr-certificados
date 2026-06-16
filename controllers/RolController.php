@@ -29,9 +29,8 @@ class RolController
             $descripcion
         );
 
-        header(
-            'Location: ../views/roles/index.php'
-        );
+        header('Location: ../views/roles/index.php');
+        exit;
     }
 
     // Actualizar rol
@@ -41,9 +40,7 @@ class RolController
 
         $nombre = trim($_POST['nombre']);
 
-        $descripcion = trim(
-            $_POST['descripcion']
-        );
+        $descripcion = trim($_POST['descripcion']);
 
         $this->rolModel->actualizar(
             $id,
@@ -51,9 +48,8 @@ class RolController
             $descripcion
         );
 
-        header(
-            'Location: ../views/roles/index.php'
-        );
+        header('Location: ../views/roles/index.php');
+        exit;
     }
 
     // Eliminar rol
@@ -63,8 +59,19 @@ class RolController
 
         $this->rolModel->eliminar($id);
 
-        header(
-            'Location: ../views/roles/index.php'
-        );
+        header('Location: ../views/roles/index.php');
+        exit;
+    }
+    
+    // Cambiar estado de rol
+    public function cambiarEstado()
+    {
+        $id = $_GET['id'];
+        $estado = $_GET['estado'];
+
+        $this->rolModel->cambiarEstado($id, $estado);
+
+        header('Location: ../views/roles/index.php');
+        exit;
     }
 }
