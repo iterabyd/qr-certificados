@@ -13,7 +13,7 @@ $roles = $controller->listar();
 
 ?>
 
-<div class="flex-1">
+<div id="mainContent" class="flex-1 transition-all duration-300">
 
      <?php require_once '../../layouts/navbar.php'; ?>
     <main class="p-6">
@@ -166,7 +166,7 @@ $roles = $controller->listar();
             <button type="button" onclick="cerrarModal('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="../../actions/rol_update.php">
+        <form method="POST" action="../actions/rol_update.php">
             <input type="hidden" id="edit_id" name="id">
 
             <div class="mb-4">

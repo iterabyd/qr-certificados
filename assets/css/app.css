@@ -1,9 +1,13 @@
-/* Fuente principal del sistema */
+/* =====================================================
+   FUENTE PRINCIPAL
+===================================================== */
 body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Colores corporativos */
+/* =====================================================
+   VARIABLES DEL SISTEMA
+===================================================== */
 :root {
     --color-marron: #5C4033;
     --color-marron-oscuro: #3E2723;
@@ -13,51 +17,57 @@ body {
     --color-fondo: #F5F5F5;
 }
 
-/* Sidebar */
+/* =====================================================
+   ESTRUCTURA GENERAL
+===================================================== */
 .sidebar {
     background-color: var(--color-marron-oscuro);
+    transition: all 0.3s ease;
 }
 
-/* Header */
 .header-app {
     background-color: var(--color-blanco);
 }
 
-/* Botón principal */
+.text-title {
+    color: var(--color-marron-oscuro);
+}
+
+/* =====================================================
+   BOTONES
+===================================================== */
 .btn-primary {
     background-color: var(--color-dorado);
     color: white;
-    transition: .3s;
+    transition: all .3s ease;
 }
 
 .btn-primary:hover {
     background-color: var(--color-dorado-hover);
 }
 
-/* Botón secundario */
 .btn-secondary {
     background-color: var(--color-marron);
     color: white;
-    transition: .3s;
+    transition: all .3s ease;
 }
 
 .btn-secondary:hover {
     opacity: .9;
 }
 
-/* Títulos */
-.text-title {
-    color: var(--color-marron-oscuro);
-}
-
-/* Tarjetas */
+/* =====================================================
+   TARJETAS
+===================================================== */
 .card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,.08);
 }
 
-/* Badges */
+/* =====================================================
+   BADGES
+===================================================== */
 .badge-active {
     background: #DCFCE7;
     color: #166534;
@@ -68,45 +78,141 @@ body {
     color: #991B1B;
 }
 
-/* Menú lateral */
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
 .menu-item {
-display: flex;
-align-items: center;
-gap: 12px;
-padding: 12px 14px;
-border-radius: 10px;
-margin-bottom: 6px;
-transition: all .25s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: all .25s ease;
 }
 
 .menu-item:hover {
-background: rgba(255,255,255,.08);
-transform: translateX(4px);
+    background: rgba(255,255,255,.08);
+    transform: translateX(4px);
 }
 
 .menu-item.active {
-background: var(--color-dorado);
-color: white;
+    background: var(--color-dorado);
+    color: white;
 }
 
-.sidebar-hidden {
-margin-left: -256px;
+/* =====================================================
+   BOTON TOGGLE SIDEBAR
+===================================================== */
+.sidebar-toggle {
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease;
 }
 
+.sidebar-toggle:hover {
+    color: var(--color-dorado);
+}
 
+/* =====================================================
+   SIDEBAR COLAPSADO
+===================================================== */
+.sidebar-collapsed {
+    width: 80px !important;
+}
+
+/* Ocultar textos */
+.sidebar-collapsed .menu-text {
+    display: none;
+}
+
+/* Ocultar nombre del sistema */
+.sidebar-collapsed #logoText {
+    display: none;
+}
+
+/* Centrar iconos */
+.sidebar-collapsed .menu-item {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+/* Ajustar cabecera del sidebar */
+.sidebar-collapsed .logo-container {
+    justify-content: center;
+    gap: 0;
+}
+
+/* =====================================================
+   TRANSICIONES
+===================================================== */
+.menu-text,
+#logoText,
+.sidebar,
+.menu-item {
+    transition: all .3s ease;
+}
+
+/* =====================================================
+   TABLAS
+===================================================== */
+.table-app {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-app th {
+    background-color: var(--color-marron-oscuro);
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.table-app td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* =====================================================
+   INPUTS
+===================================================== */
+.input-app {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px 12px;
+    outline: none;
+}
+
+.input-app:focus {
+    border-color: var(--color-dorado);
+    box-shadow: 0 0 0 2px rgba(201,162,39,.20);
+}
+
+/* =====================================================
+   MODALES
+===================================================== */
+.modal-app {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 @media (max-width: 768px) {
 
-
-#sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 999;
-}
-
-.sidebar-hidden {
-    transform: translateX(-100%);
-    margin-left: 0;
-}
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        height: 100vh;
+    }
 
 }

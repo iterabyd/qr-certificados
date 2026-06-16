@@ -27,22 +27,17 @@ function abrirModalEditar(id, nombre, descripcion) {
 // Mostrar/Ocultar sidebar
 document.addEventListener('DOMContentLoaded', function () {
 
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('toggleSidebar');
 
-const btnToggle = document.getElementById('toggleSidebar');
-const sidebar = document.getElementById('sidebar');
+    if (!sidebar || !toggle) return;
 
-if (btnToggle && sidebar) {
+    toggle.addEventListener('click', function () {
 
-    btnToggle.addEventListener('click', function () {
-
-        sidebar.classList.toggle('sidebar-hidden');
+        sidebar.classList.toggle('sidebar-collapsed');
 
     });
 
-}
-
 });
-
-
 
 
