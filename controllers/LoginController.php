@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/config.php';
 
 // Controlador encargado de la autenticación
 class LoginController
@@ -19,7 +20,9 @@ class LoginController
     // Validar credenciales del usuario
     public function login()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         // Obtener datos enviados desde el formulario
         $usuario =
@@ -73,7 +76,7 @@ class LoginController
 
         // Redireccionar al dashboard
         header(
-            'Location: ../views/dashboard/index.php'
+            'Location: ' . BASE_URL . '/views/dashboard/index.php'
         );
 
         exit;

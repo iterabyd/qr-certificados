@@ -1,9 +1,14 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../../config/config.php';
 
 if(isset($_SESSION['usuario']))
 {
-    header("Location: dashboard.php");
+    header('Location: ' . BASE_URL . '/views/dashboard/index.php');
     exit;
 }
 ?>
@@ -26,7 +31,7 @@ if(isset($_SESSION['usuario']))
         Sistema QR
     </h1>
 
-    <form method="POST" action="../../actions/login.php">
+    <form method="POST" action="<?= BASE_URL ?>/actions/login.php">
 
         <div class="mb-4">
 

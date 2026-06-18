@@ -1,6 +1,12 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Redireccionar al login
+if(isset($_SESSION['usuario']))
+{
+    header('Location: views/dashboard/index.php');
+    exit;
+}
 
-header('Location: views/auth/login.php');
-exit;
+require_once 'views/auth/login.php';
