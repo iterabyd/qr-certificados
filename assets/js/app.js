@@ -1,20 +1,75 @@
-// Abrir modal
+// ======================================================
+// SIDEBAR: abrir/cerrar en móvil + colapsar en desktop
+// (único bloque - antes había listeners duplicados)
+// ======================================================
+document.addEventListener('DOMContentLoaded', function () {
+
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const mobileBtn = document.getElementById('mobileMenu');
+    const toggleBtn = document.getElementById('toggleSidebar');
+
+    if (!sidebar) return;
+
+    function abrirSidebarMovil() {
+        sidebar.classList.remove('-translate-x-full');
+        if (overlay) overlay.classList.remove('hidden');
+    }
+
+    function cerrarSidebarMovil() {
+        sidebar.classList.add('-translate-x-full');
+        if (overlay) overlay.classList.add('hidden');
+    }
+
+    if (mobileBtn) {
+        mobileBtn.addEventListener('click', abrirSidebarMovil);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', cerrarSidebarMovil);
+    }
+
+    // Colapsar/expandir sidebar SOLO en desktop
+    if (toggleBtn) {
+
+        toggleBtn.addEventListener('click', function () {
+
+            if (window.innerWidth >= 768) {
+                sidebar.classList.toggle('sidebar-collapsed');
+            }
+        });
+    }
+
+    // Si la pantalla cambia de tamaño, aseguramos un estado coherente
+    window.addEventListener('resize', function () {
+
+        if (window.innerWidth >= 768) {
+            // En desktop el sidebar siempre visible, sin clase de móvil
+            sidebar.classList.remove('-translate-x-full');
+            if (overlay) overlay.classList.add('hidden');
+        } else {
+            // Al volver a móvil, quitamos el colapsado de desktop
+            sidebar.classList.remove('sidebar-collapsed');
+        }
+    });
+
+});
+
+// ======================================================
+// MODALES
+// ======================================================
 function abrirModal(idModal) {
     const modal = document.getElementById(idModal);
-
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
 
-// Cerrar modal
 function cerrarModal(idModal) {
     const modal = document.getElementById(idModal);
-
     modal.classList.remove('flex');
     modal.classList.add('hidden');
 }
 
-// Abrir modal de edición de rol
 function abrirModalEditar(id, nombre, descripcion) {
 
     document.getElementById('edit_id').value = id;
@@ -24,27 +79,9 @@ function abrirModalEditar(id, nombre, descripcion) {
     abrirModal('modalEditarRol');
 }
 
-// Mostrar/Ocultar sidebar
-document.addEventListener('DOMContentLoaded', function () {
-
-    const sidebar = document.getElementById('sidebar');
-    const toggle = document.getElementById('toggleSidebar');
-
-    if (!sidebar || !toggle) return;
-
-    toggle.addEventListener('click', function () {
-
-        sidebar.classList.toggle('sidebar-collapsed');
-
-    });
-
-});
-
-
 // ======================================================
 // TABLA ROLES GRID.JS
 // ======================================================
-
 document.addEventListener('DOMContentLoaded', function () {
 
     const tablaRoles = document.getElementById('tablaRoles');

@@ -46,8 +46,8 @@ if (!isset($_SESSION['usuario'])) {
 
 </head>
 
-<body class="bg-gray-100 font-[Inter]">
+<body class="bg-gray-100 font-[Inter] overflow-x-hidden">
 
     <!-- Contenedor principal -->
 
-<div class="flex min-h-screen">
+    <div class="flex min-h-screen relative">

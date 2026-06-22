@@ -45,7 +45,7 @@ $roles = $controller->listar();
 
 <!-- Modal Crear -->
 <div id="modalCrearRol" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+    <div class="bg-white rounded-xl shadow-xl w-[95%] md:w-full max-w-lg p-6">
         <div class="flex justify-between items-center mb-5">
             <h3 class="text-xl font-semibold text-[#3E2723]">Nuevo Rol</h3>
             <button type="button" onclick="cerrarModal('modalCrearRol')"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -72,7 +72,7 @@ $roles = $controller->listar();
 
 <!-- Modal Editar -->
 <div id="modalEditarRol" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+    <div class="bg-white rounded-xl shadow-xl w-[95%] md:w-full max-w-lg p-6">
         <div class="flex justify-between items-center mb-5">
             <h3 class="text-xl font-semibold text-[#3E2723]">Editar Rol</h3>
             <button type="button" onclick="cerrarModal('modalEditarRol')"><i class="fa-solid fa-xmark text-xl"></i></button>

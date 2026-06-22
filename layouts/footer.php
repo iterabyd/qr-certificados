@@ -6,7 +6,9 @@
 <script src="<?= BASE_URL ?>/assets/js/app.js?v=<?= time(); ?>"></script>
 <!-- <script src="/qr-certificados/assets/js/app.js"></script> -->
 
-</div>
+</div> <!-- cierra #mainContent (abierto en sidebar.php) -->
+
+</div> <!-- cierra .flex.min-h-screen.relative (abierto en header.php) -->
 
 </body>
 </html>

@@ -1,5 +1,4 @@
-<aside id="sidebar" class="sidebar h-screen w-64 text-white transition-all duration-300 shadow-xl">
-
+<aside id="sidebar" class="sidebar fixed md:relative left-0 top-0 z-40 h-screen w-64 text-white -translate-x-full md:translate-x-0 transition-all duration-300 shadow-xl">
 
 <!-- Logo -->
 <div class="logo-container flex items-center justify-between h-16 px-4 border-b border-white/10">
@@ -8,13 +7,13 @@
 
         <i class="fa-solid fa-shield-halved text-2xl text-yellow-400"></i>
 
-        <span id="logoText" class="text-lg font-semibold">
+        <span id="logoText" class="text-lg font-semibold whitespace-nowrap">
             Sistema QR
         </span>
 
     </div>
 
-    <button id="toggleSidebar" class="sidebar-toggle text-white">
+    <button id="toggleSidebar" class="sidebar-toggle text-white hidden md:flex">
         <i class="fa-solid fa-bars"></i>
     </button>
 
@@ -55,3 +54,9 @@
 </nav>
 
 </aside>
+
+<!-- Overlay para móvil -->
+<div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-30 md:hidden"></div>
+
+<!-- Contenedor del contenido principal (navbar + página). Se cierra en footer.php -->
+<div id="mainContent" class="flex-1 min-h-screen w-full transition-all duration-300">
