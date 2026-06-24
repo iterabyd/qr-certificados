@@ -235,16 +235,3 @@ button.gridjs-sort-desc {
     }
 
 }
-
-@media (min-width: 768px) {
-
-    #mainContent {
-        margin-left: 256px;
-        transition: margin-left .3s ease;
-    }
-
-    .sidebar.sidebar-collapsed + #sidebarOverlay + #mainContent {
-        margin-left: 80px;
-    }
-
-}
