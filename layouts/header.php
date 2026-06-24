@@ -5,6 +5,12 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Asegurar que BASE_URL y demás constantes estén definidas,
+// sin importar desde qué vista se incluya este header.
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/../config/config.php';
+}
+
 if (!isset($_SESSION['usuario'])) {
     header('Location: /qr-certificados/views/auth/login.php');
     exit;
@@ -39,7 +45,7 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="/qr-certificados/assets/css/app.css">
+    <link rel="stylesheet" href="/qr-certificados/assets/css/app.css?v=<?= time(); ?>">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
