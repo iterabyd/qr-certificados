@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 '${numeroDocumento}',
                                 '${nombres}',
                                 '${apPaterno}',
-                                '${apMaterno}',
+                                '${apMaterno}',aa
                             )"
                             class="text-blue-600 hover:text-blue-800 mr-3">
                             Editar
