@@ -37,7 +37,7 @@ class UsuarioController
 
         // Evitar usuarios duplicados
         if ($this->usuarioModel->existeUsuario($usuario)) {
-            header('Location: ../views/usuarios/index.php?error=usuario_existe');
+            header('Location: ' . BASE_URL . '/views/usuarios/index.php?error=usuario_existe');
             exit;
         }
 
@@ -56,7 +56,7 @@ class UsuarioController
             $email
         );
 
-        header('Location: ../views/usuarios/index.php');
+        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
         exit;
     }
 
@@ -82,7 +82,7 @@ class UsuarioController
             $email
         );
 
-        header('Location: ../views/usuarios/index.php');
+        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
         exit;
     }
 
@@ -102,7 +102,7 @@ class UsuarioController
             $passwordHash
         );
 
-        header('Location: ../views/usuarios/index.php');
+        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
         exit;
     }
 
@@ -114,7 +114,7 @@ class UsuarioController
 
         $this->usuarioModel->cambiarEstado($id, $estado);
 
-        header('Location: ../views/usuarios/index.php');
+        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
         exit;
     }
 }

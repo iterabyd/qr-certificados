@@ -4,7 +4,12 @@
 
 <script>const BASE_URL = '<?= BASE_URL ?>';</script>
 <script src="<?= BASE_URL ?>/assets/js/app.js?v=<?= time(); ?>"></script>
-<!-- <script src="/qr-certificados/assets/js/app.js"></script> -->
+<script src="<?= BASE_URL ?>/assets/js/modal.js?v=<?= time(); ?>"></script>
+<script src="<?= BASE_URL ?>/assets/js/sidebar.js?v=<?= time(); ?>"></script>
+
+<?php if(isset($jsModulo)): ?>
+    <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.js"></script>
+<?php endif; ?>
 
 </div> <!-- cierra #mainContent (abierto en sidebar.php) -->
 

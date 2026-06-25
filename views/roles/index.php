@@ -7,6 +7,8 @@ require_once '../../layouts/sidebar.php';
 
 require_once '../../controllers/RolController.php';
 
+$jsModulo = 'roles'; 
+
 // Título de la página
 $tituloPagina = 'Roles';
 

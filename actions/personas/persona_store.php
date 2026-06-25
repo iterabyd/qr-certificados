@@ -15,4 +15,4 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $controller = new PersonaController();
 
-$controller->actualizar();
+$controller->crear();

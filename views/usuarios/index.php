@@ -8,6 +8,7 @@ require_once '../../layouts/sidebar.php';
 require_once '../../controllers/UsuarioController.php';
 require_once '../../controllers/RolController.php';
 
+$jsModulo = 'usuarios'; 
 // Título de la página
 $tituloPagina = 'Usuarios';
 
