@@ -35,7 +35,13 @@ class PersonaController
 
         // Evitar usuarios duplicados
         if ($this->personaModel->existePersona($numero_documento)) {
-            header('Location: ' . BASE_URL . '/views/personas/index.php?error=persona_existe');
+            
+            $_SESSION['alerta'] = [
+                'icon' => 'warning',
+                'title' => 'Documento duplicado',
+                'text' => 'Ya existe una persona con ese número de documento.'
+            ];
+            header('Location: ' . BASE_URL . '/views/personas/index.php');
             exit;
         }
 
@@ -46,6 +52,12 @@ class PersonaController
             $ap_paterno,
             $ap_materno
         );
+
+        $_SESSION['alerta'] = [
+            'icon' => 'success',
+            'title' => 'Registro exitoso',
+            'text' => 'La persona fue registrada correctamente.'
+        ];
 
         header('Location: ' . BASE_URL . '/views/personas/index.php');
         exit;

@@ -23,6 +23,7 @@ $tiposDocumento = $tipoDocumentoController->listar();
 
 require_once '../../layouts/navbar.php';
 
+
 ?>
 
 <main class="p-4 md:p-6">
@@ -169,5 +170,5 @@ require_once '../../layouts/navbar.php';
 const personas = <?= json_encode($personas); ?>;
 console.log(personas);
 </script>
-
+<?php require_once '../../layouts/alerts.php'; ?>
 <?php require_once '../../layouts/footer.php'; ?>
