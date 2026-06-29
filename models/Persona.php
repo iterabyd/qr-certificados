@@ -96,59 +96,37 @@ class Persona
     // Actualizar persona
     public function actualizar(
         $id,
-        $nombre,
-        $descripcion
+        $tipo_documento_id,
+        $numero_documento,
+        $nombres,
+        $ap_paterno,
+        $ap_materno
     )
     {
         $sql = "
             UPDATE personas
             SET
-                nombre = ?,
-                descripcion = ?
+                tipo_documento_id = ?,
+                numero_documento = ?,
+                nombres = ?,
+                ap_paterno = ?,
+                ap_materno = ?
             WHERE id = ?
         ";
 
         $stmt = $this->conexion->prepare($sql);
 
         return $stmt->execute([
-            $nombre,
-            $descripcion,
-            $id
+            $id,
+            $tipo_documento_id,
+            $numero_documento,
+            $nombres,
+            $ap_paterno,
+            $ap_materno,
+            
         ]);
     }
 
-    // Eliminar rol
-    public function eliminar($id)
-    {
-        $sql = "
-            DELETE FROM roles
-            WHERE id = ?
-        ";
-
-        $stmt = $this->conexion->prepare($sql);
-
-        return $stmt->execute([$id]);
-    }
-
-    // Cambiar estado del rol
-    public function cambiarEstado(
-        $id,
-        $estado
-    )
-    {
-        $sql = "
-            UPDATE roles
-            SET estado = ?
-            WHERE id = ?
-        ";
-
-        $stmt = $this->conexion->prepare($sql);
-
-        return $stmt->execute([
-            $estado,
-            $id
-        ]);
-    }
 
     // Verificar si existe la persona
     public function existePersona(

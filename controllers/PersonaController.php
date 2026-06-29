@@ -56,40 +56,23 @@ class PersonaController
     {
         $id = $_POST['id'];
 
-        $nombre = trim($_POST['nombre']);
+        $tipo_documento_id = $_POST['tipo_documento_id'];
+        $numero_documento = trim($_POST['numero_documento']);
+        $nombres = trim($_POST['nombres']);
+        $ap_paterno = trim($_POST['ap_paterno']);
+        $ap_materno = trim($_POST['ap_materno']);
 
-        $descripcion = trim($_POST['descripcion']);
-
-        $this->rolModel->actualizar(
+        $this->personaModel->actualizar(
             $id,
-            $nombre,
-            $descripcion
+            $tipo_documento_id,
+            $numero_documento,
+            $nombres,
+            $ap_paterno,
+            $ap_materno
         );
 
-        header('Location: ' . BASE_URL . '/views/roles/index.php');
+        header('Location: ' . BASE_URL . '/views/personas/index.php');
         exit;
     }
 
-    // Eliminar rol
-    public function eliminar()
-    {
-        $id = $_GET['id'];
-
-        $this->rolModel->eliminar($id);
-
-        header('Location: ../views/roles/index.php');
-        exit;
-    }
-    
-    // Cambiar estado de rol
-    public function cambiarEstado()
-    {
-        $id = $_GET['id'];
-        $estado = $_GET['estado'];
-
-        $this->rolModel->cambiarEstado($id, $estado);
-
-        header('Location: ../views/roles/index.php');
-        exit;
-    }
 }

@@ -149,11 +149,6 @@ require_once '../../layouts/navbar.php';
 
             </div>
 
-            <div>
-                <label class="block mb-1.5 font-medium">Email</label>
-                <input type="email" id="edit_email" name="email" required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#C9A227]">
-            </div>
-
             <div class="flex justify-end gap-2 pt-2">
                 <button type="button" onclick="cerrarModal('modalEditarPersona')" class="px-4 py-2 border rounded-lg">Cancelar</button>
                 <button type="submit" class="bg-[#C9A227] hover:bg-[#b38f1f] text-white px-4 py-2 rounded-lg">Actualizar</button>
@@ -167,7 +162,6 @@ require_once '../../layouts/navbar.php';
 
 <script>
 const personas = <?= json_encode($personas); ?>;
-console.log(personas);
 </script>
 
 <?php require_once '../../layouts/footer.php'; ?>
