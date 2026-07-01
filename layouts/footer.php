@@ -7,6 +7,12 @@
 <script src="<?= BASE_URL ?>/assets/js/modal.js?v=<?= time(); ?>"></script>
 <script src="<?= BASE_URL ?>/assets/js/sidebar.js?v=<?= time(); ?>"></script>
 
+<script src="<?= BASE_URL ?>/public/js/personas/personas.service.js"></script>
+<script src="<?= BASE_URL ?>/public/js/personas/personas.grid.js"></script>
+<script src="<?= BASE_URL ?>/public/js/personas/personas.form.js"></script>
+<script src="<?= BASE_URL ?>/public/js/personas/personas.validation.js"></script>
+<script src="<?= BASE_URL ?>/public/js/personas/personas.js"></script>
+
 <?php if(isset($jsModulo)): ?>
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.js"></script>
 <?php endif; ?>

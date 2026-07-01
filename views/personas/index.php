@@ -54,7 +54,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalCrearPersona')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/personas/persona_store.php" class="space-y-4">
+        <form id="formCrearPersona" method="POST" action="<?= BASE_URL ?>/actions/personas/persona_store.php" class="space-y-4">
 
             <div>
                 <label class="block mb-1.5 font-medium">Tipo de Documento</label>
@@ -166,9 +166,5 @@ require_once '../../layouts/navbar.php';
 
 
 
-<script>
-const personas = <?= json_encode($personas); ?>;
-console.log(personas);
-</script>
 <?php require_once '../../layouts/alerts.php'; ?>
 <?php require_once '../../layouts/footer.php'; ?>
