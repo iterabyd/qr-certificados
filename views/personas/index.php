@@ -53,7 +53,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalCrearPersona')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/personas/persona_store.php" class="space-y-4">
+        <form id="formCrearPersona" method="POST" action="<?= BASE_URL ?>/actions/personas/persona_store.php" class="space-y-4">
 
             <div>
                 <label class="block mb-1.5 font-medium">Tipo de Documento</label>
@@ -111,7 +111,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalEditarPersona')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/personas/persona_update.php" class="space-y-4">
+        <form id="formEditarPersona" method="POST" action="<?= BASE_URL ?>/actions/personas/persona_update.php" class="space-y-4">
 
             <input type="hidden" id="edit_id" name="id">
 

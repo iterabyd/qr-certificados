@@ -1,18 +1,13 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once '../../config/config.php';
+require_once '../../controllers/PersonaController.php';
 
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../controllers/UsuarioController.php';
+header('Content-Type: application/json; charset=utf-8');
 
-// Solo procesar si es una petición POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ' . BASE_URL . '/views/usuarios/index.php');
-    exit;
-}
+$controller = new PersonaController();
 
-$controller = new UsuarioController();
-
-$controller->actualizar();
+echo json_encode(
+    $controller->actualizar(),
+    JSON_UNESCAPED_UNICODE
+);

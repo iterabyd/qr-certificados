@@ -7,27 +7,27 @@ class Persona
 {
     private $conexion;
 
-    // Constructor
     public function __construct()
     {
         $database = new Database();
         $this->conexion = $database->conectar();
     }
 
-    // Obtener todos las personas
+    // Listar personas
     public function listar()
     {
         $sql = "
-            SELECT 	p.id, 
-                    p.tipo_documento_id,
-                    t.codigo,
-                    p.numero_documento, 
-                    p.nombres, 
-                    p.ap_paterno, 
-                    p.ap_materno        
-            FROM personas p 
+            SELECT
+                p.id,
+                p.tipo_documento_id,
+                t.codigo,
+                p.numero_documento,
+                p.nombres,
+                p.ap_paterno,
+                p.ap_materno
+            FROM personas p
             INNER JOIN tipos_documento t
-            ON p.tipo_documento_id=t.id
+                ON p.tipo_documento_id = t.id
             ORDER BY p.id DESC
         ";
 
@@ -37,7 +37,7 @@ class Persona
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Buscar una persona por ID
+    // Obtener una persona por ID
     public function obtenerPorId($id)
     {
         $sql = "
@@ -69,7 +69,6 @@ class Persona
                 nombres,
                 ap_paterno,
                 ap_materno
-
             )
             VALUES
             (
@@ -78,7 +77,6 @@ class Persona
                 ?,
                 ?,
                 ?
-            
             )
         ";
 
@@ -117,35 +115,63 @@ class Persona
         $stmt = $this->conexion->prepare($sql);
 
         return $stmt->execute([
-            $id,
             $tipo_documento_id,
             $numero_documento,
             $nombres,
             $ap_paterno,
             $ap_materno,
-            
+            $id
         ]);
     }
 
-
-    // Verificar si existe la persona
-    public function existePersona(
-        $numero_documento
-    )
+    // Eliminar persona
+    public function eliminar($id)
     {
         $sql = "
-            SELECT id
+            DELETE FROM personas
+            WHERE id = ?
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+
+        return $stmt->execute([$id]);
+    }
+
+    // Verificar si existe una persona
+    public function existePersona($numero_documento)
+    {
+        $sql = "
+            SELECT COUNT(*)
             FROM personas
             WHERE numero_documento = ?
         ";
 
-        $stmt =
-            $this->conexion->prepare($sql);
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute([$numero_documento]);
+
+        return $stmt->fetchColumn() > 0;
+    }
+
+    // Verificar documento repetido al actualizar
+    public function existePersonaActualizar(
+        $numero_documento,
+        $id
+    )
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM personas
+            WHERE numero_documento = ?
+            AND id <> ?
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
 
         $stmt->execute([
-            $numero_documento
+            $numero_documento,
+            $id
         ]);
 
-        return $stmt->fetch();
+        return $stmt->fetchColumn() > 0;
     }
 }

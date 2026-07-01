@@ -1,115 +1,147 @@
-// ======================================================
-// GRID PERSONAS
-// ======================================================
+const PersonaGrid = {
 
-let gridPersonas = null;
+    grid: null,
 
-async function iniciarTablaPersonas() {
+    render(personas) {
 
-    const personas = await obtenerPersonas();
+        const contenedor = document.getElementById('tablaPersonas');
 
-    renderizarTablaPersonas(personas);
+        if (!contenedor) {
+            return;
+        }
 
-}
+        // Destruir la tabla anterior
+        if (this.grid) {
+            this.grid.destroy();
+            contenedor.innerHTML = '';
+        }
 
-function renderizarTablaPersonas(personas) {
+        this.grid = new gridjs.Grid({
 
-    const tabla = document.getElementById("tablaPersonas");
+            columns: [
 
-    if (!tabla)
-        return;
+                {
+                    name: 'ID',
+                    width: '60px'
+                },
 
-    if (gridPersonas) {
+                {
+                    name: 'Tipo Documento ID',
+                    hidden: true
+                },
 
-        tabla.innerHTML = "";
+                {
+                    name: 'Tipo Documento'
+                },
 
-    }
+                {
+                    name: 'Número Documento'
+                },
 
-    gridPersonas = new gridjs.Grid({
+                {
+                    name: 'Nombres',
+                    formatter: (_, row) => {
 
-        columns: [
+                        return `${row.cells[4].data} ${row.cells[5].data} ${row.cells[6].data}`;
 
-            {
-                name: "ID",
-                width: "60px"
-            },
+                    }
+                },
 
-            {
-                name: "Tipo Documento ID",
-                hidden: true
-            },
+                {
+                    name: 'Ap. Paterno',
+                    hidden: true
+                },
 
-            {
-                name: "Tipo Documento"
-            },
+                {
+                    name: 'Ap. Materno',
+                    hidden: true
+                },
 
-            {
-                name: "Número Documento"
-            },
+                {
+                    name: 'Acciones',
 
-            {
-                name: "Nombres",
+                    formatter: (_, row) => {
 
-                formatter: (_, row) => {
+                        const id = row.cells[0].data;
+                        const tipoDocumentoId = row.cells[1].data;
+                        const codigo = row.cells[2].data;
+                        const numeroDocumento = row.cells[3].data;
+                        const nombres = row.cells[4].data;
+                        const apPaterno = row.cells[5].data;
+                        const apMaterno = row.cells[6].data;
 
-                    return `${row.cells[4].data} ${row.cells[5].data} ${row.cells[6].data}`;
+                        return gridjs.html(`
+
+                            <button
+                                type="button"
+                                class="text-blue-600 hover:text-blue-800 mr-3"
+                                onclick="abrirModalEditarPersona(
+                                    '${id}',
+                                    '${tipoDocumentoId}',
+                                    '${codigo}',
+                                    '${numeroDocumento}',
+                                    '${nombres}',
+                                    '${apPaterno}',
+                                    '${apMaterno}'
+                                )">
+
+                                <i class="fa-solid fa-pen"></i>
+                                Editar
+
+                            </button>
+
+                            `);
+
+                    }
 
                 }
 
+            ],
+
+            data: personas.map(persona => [
+
+                persona.id,
+                persona.tipo_documento_id,
+                persona.codigo,
+                persona.numero_documento,
+                persona.nombres,
+                persona.ap_paterno,
+                persona.ap_materno
+
+            ]),
+
+            search: true,
+
+            sort: true,
+
+            pagination: {
+                limit: 10
             },
 
-            {
-                name: "Ap. Paterno",
-                hidden: true
-            },
+            language: {
 
-            {
-                name: "Ap. Materno",
-                hidden: true
-            },
+                search: {
+                    placeholder: 'Buscar...'
+                },
 
-            {
-                name: "Acciones",
+                pagination: {
 
-                formatter: (_, row) => {
+                    previous: 'Anterior',
+                    next: 'Siguiente',
+                    showing: 'Mostrando',
+                    to: 'a',
+                    of: 'de',
 
-                    return gridjs.html(`
-                        <button
-                            class="text-blue-600 hover:text-blue-800">
-                            Editar
-                        </button>
-                    `);
+                    results: () => 'registros'
 
                 }
 
             }
 
-        ],
+        });
 
-        data: personas.map(p => [
+        this.grid.render(contenedor);
 
-            p.id,
-            p.tipo_documento_id,
-            p.codigo,
-            p.numero_documento,
-            p.nombres,
-            p.ap_paterno,
-            p.ap_materno
+    }
 
-        ]),
-
-        search: true,
-
-        sort: true,
-
-        pagination: {
-
-            limit: 10
-
-        }
-
-    });
-
-    gridPersonas.render(tabla);
-
-}
+};

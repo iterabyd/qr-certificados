@@ -5,9 +5,22 @@ require_once '../../controllers/PersonaController.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-$controller = new PersonaController();
+try {
 
-echo json_encode(
-    $controller->crear(),
-    JSON_UNESCAPED_UNICODE
-);
+    $controller = new PersonaController();
+
+    $response = $controller->crear();
+
+    echo json_encode(
+        $response,
+        JSON_UNESCAPED_UNICODE
+    );
+
+} catch (Exception $e) {
+
+    echo json_encode([
+        'success' => false,
+        'message' => $e->getMessage()
+    ], JSON_UNESCAPED_UNICODE);
+
+}

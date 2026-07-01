@@ -1,24 +1,29 @@
-// ======================================================
-// MÓDULO PERSONAS
-// Inicializa todos los componentes del módulo.
-// ======================================================
+const PersonaApp = {
 
-document.addEventListener("DOMContentLoaded", async () => {
+    personas: [],
 
-    await iniciarModuloPersonas();
+    async init() {
+
+        PersonaValidation.init();
+
+        PersonaForm.init();
+
+        await this.cargar();
+
+    },
+
+    async cargar() {
+
+        this.personas = await PersonaService.listar();
+
+        PersonaGrid.render(this.personas);
+
+    }
+
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    PersonaApp.init();
 
 });
-
-async function iniciarModuloPersonas() {
-
-    // Inicializar tabla
-    await iniciarTablaPersonas();
-
-    // Inicializar formularios
-    iniciarFormularioPersona();
-
-    // Inicializar validaciones
-    iniciarValidacionesPersona();
-
-}
-
