@@ -148,4 +148,3 @@ class Persona
 
         return $stmt->fetch();
     }
-}
