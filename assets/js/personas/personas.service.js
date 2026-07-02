@@ -77,28 +77,31 @@ const PersonaService = {
     },
 
     /**
-     * Eliminar persona
+     * Cambiar estado de persona
      */
-    async eliminar(id) {
+    async cambiarEstado(id, estado) {
 
-        try {
+        const formData = new FormData();
 
-            const response = await fetch(
-                BASE_URL + '/actions/personas/persona_delete.php?id=' + id
-            );
+        formData.append('id', id);
 
-            return await response.json();
+        formData.append('estado', estado);
 
-        } catch (error) {
+        const response = await fetch(
 
-            console.error(error);
+            BASE_URL + '/actions/personas/persona_estado.php',
 
-            return {
-                success: false,
-                message: 'Ocurrió un error al eliminar la persona.'
-            };
+            {
 
-        }
+                method: 'POST',
+
+                body: formData
+
+            }
+
+        );
+
+        return await response.json();
 
     }
 

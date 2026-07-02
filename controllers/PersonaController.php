@@ -135,5 +135,21 @@ class PersonaController
         );
 
     }
+    public function cambiarEstado()
+    {
+        $id = $_POST['id'];
+        $estado = $_POST['estado'];
+
+        $this->personaModel->cambiarEstado(
+            $id,
+            $estado
+        );
+
+        return Response::success(
+            $estado == 1
+                ? 'Persona activada correctamente.'
+                : 'Persona inactivada correctamente.'
+        );
+    }
 
 }

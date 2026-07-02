@@ -52,7 +52,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalCrearUsuario')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_store.php" class="space-y-4">
+        <form id="formCrearUsuario" method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_store.php" class="space-y-4">
 
             <div>
                 <label class="block mb-1.5 font-medium">Rol</label>
@@ -120,7 +120,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalEditarUsuario')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_update.php" class="space-y-4">
+        <form id="formEditarUsuario" method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_update.php" class="space-y-4">
 
             <input type="hidden" id="edit_id" name="id">
 
@@ -181,7 +181,7 @@ require_once '../../layouts/navbar.php';
             <button type="button" onclick="cerrarModal('modalPasswordUsuario')"><i class="fa-solid fa-xmark text-xl"></i></button>
         </div>
 
-        <form method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_password.php" class="space-y-4">
+        <form id="formPasswordUsuario" method="POST" action="<?= BASE_URL ?>/actions/usuarios/usuario_password.php" class="space-y-4">
 
             <input type="hidden" id="password_id" name="id">
 

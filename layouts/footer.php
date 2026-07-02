@@ -13,7 +13,6 @@
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.service.js"></script>
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.grid.js"></script>
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.form.js"></script>
-    <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.modal.js"></script>
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.validacion.js"></script>
     <script src="<?= BASE_URL ?>/assets/js/<?= $jsModulo ?>/<?= $jsModulo ?>.js"></script>
 

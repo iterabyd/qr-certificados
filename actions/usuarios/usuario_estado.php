@@ -1,12 +1,13 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once '../../config/config.php';
+require_once '../../controllers/UsuarioController.php';
 
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../controllers/UsuarioController.php';
+header('Content-Type: application/json; charset=utf-8');
 
 $controller = new UsuarioController();
 
-$controller->cambiarEstado();
+echo json_encode(
+    $controller->cambiarEstado(),
+    JSON_UNESCAPED_UNICODE
+);

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/Usuario.php';
+require_once __DIR__ . '/../core/Response.php';
 
 // Controlador encargado de procesar las solicitudes de usuarios
 class UsuarioController
@@ -27,70 +28,96 @@ class UsuarioController
     // Registrar usuario
     public function crear()
     {
-        $rol_id = $_POST['rol_id'];
-        $usuario = trim($_POST['usuario']);
-        $password = $_POST['password'];
-        $nombres = trim($_POST['nombres']);
-        $ap_paterno = trim($_POST['ap_paterno']);
-        $ap_materno = trim($_POST['ap_materno']);
-        $email = trim($_POST['email']);
+        try{
+            $rol_id = $_POST['rol_id'];
+            $usuario = trim($_POST['usuario']);
+            $password = $_POST['password'];
+            $nombres = trim($_POST['nombres']);
+            $ap_paterno = trim($_POST['ap_paterno']);
+            $ap_materno = trim($_POST['ap_materno']);
+            $email = trim($_POST['email']);
 
-        // Evitar usuarios duplicados
-        if ($this->usuarioModel->existeUsuario($usuario)) {
-            header('Location: ' . BASE_URL . '/views/usuarios/index.php?error=usuario_existe');
-            exit;
+            // Evitar usuarios duplicados
+            if ($this->usuarioModel->existeUsuario($usuario)) {
+                return Response::error(
+                    'El usuario ya existe.'
+                );
+            }
+
+            $passwordHash = password_hash(
+                $password,
+                PASSWORD_DEFAULT
+            );
+
+            $this->usuarioModel->crear(
+                $rol_id,
+                $usuario,
+                $passwordHash,
+                $nombres,
+                $ap_paterno,
+                $ap_materno,
+                $email
+            );
+
+            return Response::success(
+                'Usuario registrado correctamente.'
+            );
+        } catch (Exception $e) {
+
+            return Response::error(
+                $e->getMessage()
+            );
+
+        }
+            
         }
 
-        $passwordHash = password_hash(
-            $password,
-            PASSWORD_DEFAULT
-        );
+        // Actualizar usuario (sin tocar la contraseña)
+        public function actualizar()
+        {
+            $id = $_POST['id'];
 
-        $this->usuarioModel->crear(
-            $rol_id,
-            $usuario,
-            $passwordHash,
-            $nombres,
-            $ap_paterno,
-            $ap_materno,
-            $email
-        );
+            $rol_id = $_POST['rol_id'];
+            $usuario = trim($_POST['usuario']);
+            $nombres = trim($_POST['nombres']);
+            $ap_paterno = trim($_POST['ap_paterno']);
+            $ap_materno = trim($_POST['ap_materno']);
+            $email = trim($_POST['email']);
 
-        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
-        exit;
-    }
+            if ($this->usuarioModel->existeUsuarioActualizar($usuario, $id)) {
+                return Response::error(
+                    'El usuario ya existe.'
+                );
 
-    // Actualizar usuario (sin tocar la contraseña)
-    public function actualizar()
-    {
-        $id = $_POST['id'];
+            }
 
-        $rol_id = $_POST['rol_id'];
-        $usuario = trim($_POST['usuario']);
-        $nombres = trim($_POST['nombres']);
-        $ap_paterno = trim($_POST['ap_paterno']);
-        $ap_materno = trim($_POST['ap_materno']);
-        $email = trim($_POST['email']);
+            $this->usuarioModel->actualizar(
+                $id,
+                $rol_id,
+                $usuario,
+                $nombres,
+                $ap_paterno,
+                $ap_materno,
+                $email
+            );
 
-        $this->usuarioModel->actualizar(
-            $id,
-            $rol_id,
-            $usuario,
-            $nombres,
-            $ap_paterno,
-            $ap_materno,
-            $email
-        );
-
-        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
-        exit;
+            return Response::success(
+                'Usuario actualizado correctamente.'
+            );
     }
 
     // Cambiar contraseña
     public function actualizarPassword()
     {
         $id = $_POST['id'];
-        $password = $_POST['password'];
+        $password = trim($_POST['password']);
+
+        if (empty($password)) {
+            return Response::error(
+                'Debe ingresar una contraseña.'
+            );
+
+        }
 
         $passwordHash = password_hash(
             $password,
@@ -102,8 +129,9 @@ class UsuarioController
             $passwordHash
         );
 
-        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
-        exit;
+        return Response::success(
+            'Contraseña actualizada correctamente.'
+        );
     }
 
     // Cambiar estado de usuario (activar/inactivar)
@@ -114,7 +142,12 @@ class UsuarioController
 
         $this->usuarioModel->cambiarEstado($id, $estado);
 
-        header('Location: ' . BASE_URL . '/views/usuarios/index.php');
-        exit;
+        return Response::success(
+
+        $estado == 1
+            ? 'Usuario activado correctamente.'
+            : 'Usuario inactivado correctamente.'
+
+        );
     }
 }

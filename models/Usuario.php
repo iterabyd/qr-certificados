@@ -212,4 +212,26 @@ class Usuario
 
         return $stmt->fetch();
     }
+    // Verificar documento repetido al actualizar
+    public function existeUsuarioActualizar(
+        $usuario,
+        $id
+    )
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM usuarios
+            WHERE usuario = ?
+            AND id <> ?
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+
+        $stmt->execute([
+            $usuario,
+            $id
+        ]);
+
+        return $stmt->fetchColumn() > 0;
+    }
 }

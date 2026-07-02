@@ -24,7 +24,8 @@ class Persona
                 p.numero_documento,
                 p.nombres,
                 p.ap_paterno,
-                p.ap_materno
+                p.ap_materno,
+                p.estado
             FROM personas p
             INNER JOIN tipos_documento t
                 ON p.tipo_documento_id = t.id
@@ -124,17 +125,21 @@ class Persona
         ]);
     }
 
-    // Eliminar persona
-    public function eliminar($id)
+    // Inactivar persona
+    public function cambiarEstado($id, $estado)
     {
         $sql = "
-            DELETE FROM personas
+            UPDATE personas
+            SET estado = ?
             WHERE id = ?
         ";
 
         $stmt = $this->conexion->prepare($sql);
 
-        return $stmt->execute([$id]);
+        return $stmt->execute([
+            $estado,
+            $id
+        ]);
     }
 
     // Verificar si existe una persona

@@ -57,7 +57,34 @@ const PersonaGrid = {
                     hidden: true
                 },
 
+                
                 {
+                name: 'Estado',
+
+                formatter: (_, row) => {
+
+                    const estado = row.cells[7].data;
+
+                    if (estado == 1) {
+
+                        return gridjs.html(`
+                            <span class="px-2 py-1 rounded-full bg-green-100 text-green-700">
+                                Activo
+                            </span>
+                        `);
+
+                    }
+
+                    return gridjs.html(`
+                        <span class="px-2 py-1 rounded-full bg-red-100 text-red-700">
+                            Inactivo
+                        </span>
+                    `);
+
+                }
+
+            },
+            {
                     name: 'Acciones',
 
                     formatter: (_, row) => {
@@ -69,6 +96,15 @@ const PersonaGrid = {
                         const nombres = row.cells[4].data;
                         const apPaterno = row.cells[5].data;
                         const apMaterno = row.cells[6].data;
+                        const estado = row.cells[7].data;   
+
+                        const textoEstado = estado == 1
+                            ? 'Inactivar'
+                            : 'Activar';
+
+                        const nuevoEstado = estado == 1
+                            ? 0
+                            : 1;
 
                         return gridjs.html(`
 
@@ -89,6 +125,12 @@ const PersonaGrid = {
                                 Editar
 
                             </button>
+                            <button
+                                type="button"
+                                class="text-red-600 hover:text-red-800"
+                                onclick="PersonaForm.cambiarEstado('${id}', '${nuevoEstado}')">
+                                ${textoEstado}
+                            </button>                        
 
                             `);
 
@@ -106,7 +148,8 @@ const PersonaGrid = {
                 persona.numero_documento,
                 persona.nombres,
                 persona.ap_paterno,
-                persona.ap_materno
+                persona.ap_materno,
+                persona.estado
 
             ]),
 
@@ -115,7 +158,7 @@ const PersonaGrid = {
             sort: true,
 
             pagination: {
-                limit: 10
+                limit: 5
             },
 
             language: {

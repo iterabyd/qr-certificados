@@ -142,6 +142,60 @@ const PersonaForm = {
 
         });
 
+    },
+
+    async cambiarEstado(id, estado) {
+
+        const confirmar = await Swal.fire({
+
+            title: estado == 1
+                ? '¿Activar persona?'
+                : '¿Inactivar persona?',
+
+            text: estado == 1
+                ? 'La persona volverá a estar disponible.'
+                : 'La persona dejará de estar disponible.',
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonText: 'Sí',
+
+            cancelButtonText: 'Cancelar',
+
+            confirmButtonColor: '#C9A227'
+
+        });
+
+        if (!confirmar.isConfirmed) {
+            return;
+        }
+
+        const respuesta =
+            await PersonaService.cambiarEstado(
+                id,
+                estado
+            );
+
+        Swal.fire({
+
+            icon: respuesta.success ? 'success' : 'error',
+
+            title: respuesta.success ? 'Correcto' : 'Error',
+
+            text: respuesta.message,
+
+            confirmButtonColor: '#C9A227'
+
+        });
+
+        if (respuesta.success) {
+
+            await PersonaApp.cargar();
+
+        }
+
     }
 
 };
