@@ -137,8 +137,8 @@ class UsuarioController
     // Cambiar estado de usuario (activar/inactivar)
     public function cambiarEstado()
     {
-        $id = $_GET['id'];
-        $estado = $_GET['estado'];
+        $id = $_POST['id'];
+        $estado = $_POST['estado'];
 
         $this->usuarioModel->cambiarEstado($id, $estado);
 

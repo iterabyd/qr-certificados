@@ -12,7 +12,7 @@ const UsuarioApp = {
     },
 
     async iniciar() {
-
+        console.log('UsuarioApp iniciado');
         await this.cargar();
 
         UsuarioForm.init();

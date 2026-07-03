@@ -1,6 +1,8 @@
 const UsuarioForm = {
 
     init() {
+        console.log('UsuarioForm.init');
+
 
         const formCrear = document.getElementById('formCrearUsuario');
         const formEditar = document.getElementById('formEditarUsuario');
@@ -21,6 +23,8 @@ const UsuarioForm = {
     },
 
     async guardar(e) {
+
+        console.log('Guardar ejecutado');
 
         e.preventDefault();
 
