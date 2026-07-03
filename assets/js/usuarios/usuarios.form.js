@@ -24,7 +24,6 @@ const UsuarioForm = {
 
     async guardar(e) {
 
-        console.log('Guardar ejecutado');
 
         e.preventDefault();
 

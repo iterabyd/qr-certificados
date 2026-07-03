@@ -13,6 +13,7 @@ const UsuarioGrid = {
             contenedor.innerHTML = '';
         }
 
+
         this.grid = new gridjs.Grid({
 
             columns: [
@@ -61,6 +62,14 @@ const UsuarioGrid = {
                         const textoEstado = estado == 1 ? 'Inactivar' : 'Activar';
                         const nuevoEstado = estado == 1 ? 0 : 1;
 
+                        const claseEstado = estado == 1
+                            ? 'text-red-600 hover:text-red-800'
+                            : 'text-green-600 hover:text-green-800';
+
+                        const iconoEstado = estado == 1
+                            ? 'fa-user-slash'
+                            : 'fa-user-check';
+
                         return gridjs.html(`
 
                             <button
@@ -76,9 +85,9 @@ const UsuarioGrid = {
                             </button>
 
                             <button
-                                class="text-red-600 hover:text-red-800"
+                                class="${claseEstado}"
                                 onclick="UsuarioForm.cambiarEstado('${id}','${nuevoEstado}')">
-                                <i class="fa-solid fa-power-off"></i> ${textoEstado}
+                                <i class="fa-solid ${iconoEstado}"></i> ${textoEstado}
                             </button>
 
                         `);
@@ -105,7 +114,7 @@ const UsuarioGrid = {
 
             search: true,
             sort: true,
-            pagination: { limit: 10 },
+            pagination: { limit: 5 },
 
             language: {
 
