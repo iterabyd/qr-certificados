@@ -179,4 +179,29 @@ class Persona
 
         return $stmt->fetchColumn() > 0;
     }
+
+    // Buscar persona por número de documento
+    public function buscarPorDocumento($numero_documento)
+    {
+        $sql = "
+            SELECT
+                p.id,
+                p.tipo_documento_id,
+                t.codigo,
+                p.numero_documento,
+                p.nombres,
+                p.ap_paterno,
+                p.ap_materno
+            FROM personas p
+            INNER JOIN tipos_documento t
+                ON t.id = p.tipo_documento_id
+            WHERE p.numero_documento = ?
+            LIMIT 1
+        ";
+
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute([$numero_documento]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

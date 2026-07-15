@@ -152,4 +152,25 @@ class PersonaController
         );
     }
 
+    // Buscar persona por documento
+    public function buscarPorDocumento($numero_documento)
+    {
+        $numero_documento = trim($numero_documento);
+
+        if (empty($numero_documento)) {
+            return Response::error('Ingrese un número de documento.');
+        }
+
+        $persona = $this->personaModel->buscarPorDocumento($numero_documento);
+
+        if (!$persona) {
+            return Response::error('No se encontró una persona con ese documento.');
+        }
+
+        return Response::success(
+            'Persona encontrada.',
+            $persona
+        );
+    }
+
 }
